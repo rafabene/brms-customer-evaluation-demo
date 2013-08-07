@@ -1,92 +1,156 @@
-JBoss BPM Customer Evaluation Demo Quickstart Guide
-===================================================
+brms-customer-evaluation-demo: BRMS Customer Evaluation Demo
+============================================================
+Author: Eric D. Schabell
+Level: Beginner
+Technologies: BRMS, JBPM
+Summary: Demonstrates the use of BRMS for a Customer Evaluation
+Prerequisites: 
+Target Product: BRMS
+Source: <https://github.com/eschabell/brms-customer-evaluation-demo>
 
-Demo based on JBoss BPM products.
+What is it?
+-----------
 
+This quickstart shows how to use BRMS to evaluate a Customer based on his agen and the ammount of his funds.
 
-Setup and Configuration
------------------------
+It will use a BPMN2 process to analyze a potential customer. The customer will have his request denied if he is underaged.
 
-See Quick Start Guide in project as ODT and PDF for details on installation. For those that can't wait:
+If the customer is an adult then a Drools rule is fired to determine if the Customer financial situation to determine if the request still valid or not.
 
-- see README in 'installs' directory
-
-- add products 
-
-- run 'init.sh' & read output
-
-- read Quick Start Guide
-
-- setup JBDS for project import, add JBoss EAP server
-
-- import projects
-
-- run 'mvn clean install' on project to build
-
-- start JBoss EAP server
-
-- login to BRM (http://localhost:8080/jboss-brms)
-
-- import repository-export from support dir
-
-- build and deploy project in BRM
-
-- login to Business Central (http://localhost:8080/business-central)
-
-- start process, view JBoss EAP logs for results
-
-Windows users see support/windows/README for installation.
-
-
-Supporting Articles
+System requirements
 -------------------
 
-[Customer Evaluation Demo Updated to EAP 6.1.0] (http://www.schabell.org/2013/05/jboss-brms-customer-eval-demo-eap-610.html)
+All you need to build this project is Java 6.0 (Java SDK 1.6) or better, Maven 3.0 or better.
 
-[Customer Evaluation Demo Updated to EAP 6.1.0.Beta] (http://www.schabell.org/2013/04/red-hat-jboss-brms-customer-evaluation.html)
+The application this project produces is designed to be run on BRMS 5.3.1 and JBoss EAP 6.1
 
-[Adding Declarative Model to Customer Evaluation Demo] (http://www.schabell.org/2013/03/jboss-brms-customer-eval-demo-declarative-model.html)
+Configure your environment
+--------------------------
 
-[Customer Evaluation Demo Updated to EAP 6.0.0] (http://www.schabell.org/2013/01/jboss-brms-customer-evaluation-demo-update.html)
+- Acccess <https://access.redhat.com/jbossnetwork/restricted/listSoftware.html>
+- Download BRMS Platform
+  1. Under JBoss Enterprise Platforms, select the BRMS Platform product.
+  2. Select version 5.3.1 in the Version field.
+  3. Download JBoss BRMS 5.3.1 Deployable for EAP 6 (Please note that this is the deployable distribution, not the standalone one.)
+  4. Now copy brms-p-5.3.1.GA-deployable-ee6.zip, to the brms-customer-evaluation-demo's installs folder. 
+  5. Ensure that this file is executable by running:
 
-[BPM made simple with Customer Evaluation Demo including video] (http://www.schabell.org/2012/06/jboss-enterprise-brms-bpm-made-simple.html)
+        $ chmod +x <path-to-project>/installs/brms-p-5.3.1.GA-deployableee6.zip
+  
+- Download EAP 6 Platform:
+  1. Under JBoss Enterprise Platforms, select the Application Platform product.
+  2. Select version 6.1.0.Beta in the Version field.
+  3. Download JBoss Aplication Platform 6.1.0.
+  4. Now copy jboss-eap-6.1.0.zip, to the brms-rewards-demo's installs folder. 
+  5. Ensure that this file is executable by running:
 
-[How to setup SOA Tools in BRMS Example for JBoss Dev Studio 7] (http://www.schabell.org/2013/04/jboss-developer-studio-7-how-to-setup.html)
+        $ chmod +x <path-to-project>/installs/jboss-eap-6.1.0.zip
 
-[How to setup SOA Tools in BRMS Example for JBoss Dev Studio 6] (http://www.schabell.org/2013/04/jboss-developer-studio-6-how-to-setup.html)
+- Lastly, from the brms-rewards-demo folder, run the init.sh script:
 
-[How to setup SOA Tools in BRMS Example for JBoss Dev Studio 5] (http://www.schabell.org/2012/05/jboss-developer-studio-5-how-to-setup.html)
+        $ ./init.sh
+  
 
-[How to add Eclipse BPMN2 Modeller project to JBoss Dev Studio 5] (http://www.schabell.org/2013/01/jbds-bpmn2-modeler-howto-install.html)
+Build and Run the Quickstart
+----------------------------
 
-[Demo now available with Windows installation scripts] (http://www.schabell.org/2013/04/jboss-brms-demos-available-windows.html)
+_NOTE: The following build command assumes you have configured your Environment._
 
-Brazilian language translation of demo documentation avaialbe in support/Quick Start Guide (pt-BR).{odt|pdf}
+1. Open a command line and navigate to the root directory of this quickstart (<repo_root>/projects/brms-customer-evaluation-demo).
+2. Type this command to build and runt the tests:
 
+        mvn clean test 
 
-Released versions
------------------
+Investigate the Console Output
+------------------------------
 
-See the tagged releases for the following versions of the product:
+### Maven
 
-- v2.0 is BRMS 5.3.1 deployable, JBDS 7.0.0.Beta1, running on JBoss EAP 6.1.0, includes pt-BR documentation translation.
+Maven prints summary of performed tests into the console:
 
-- v1.9 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1.0.
-
-- v1.8 is BRMS 5.3.1 deployable, running on JBoss EAP 6.1.0.Beta.
-
-- v1.7 demo project Mavenized.
-
-- v1.6 has Windows installation scripts.
-
-- v1.5 has patched designer that fixes removal of end-of-lines in code editor.
-
-- v1.4 is BRMS 5.3.1 deployable, running on JBoss EAP 6, added a declarative model example
-	(support/repository_export_declarative_model.zip)
-
-- v1.3 is BRMS 5.3.1 deployable, running on JBoss EAP 6, cleaner logging, serialized object model fixes.
-
-- v1.2 is BRMS 5.3.1 deployable, running on JBoss EAP 6.
-
-- v1.0 is BRMS 5.3.0 standalone, running on JBoss EAP 5.
-
+    -------------------------------------------------------
+     T E S T S
+    -------------------------------------------------------
+    Running org.jbpm.evaluation.customer.CustomerEvaluationTest
+    
+    =========================================
+    = Starting Process Underaged Test Case. =
+    =========================================
+    Entering Initialize Node
+    Leaving Initialize Node
+    Gateway: Qualify Age
+    Gateway: Qualify Age
+    Entering Underaged Node
+    Detected and reporting invalid request.
+    Set validRequest to: false
+    Leaving Underaged Node
+    Process ended in End Minor Node.
+    
+    ==========================================
+    = Starting Process Poor Adult Test Case. =
+    ==========================================
+    Entering Initialize Node
+    Leaving Initialize Node
+    Gateway: Qualify Age
+    Gateway: Qualify Age
+    Entering Adult Customer Node
+    Detected and reporting valid request
+    Set validRequest to: true
+    Leaving Adult Customer Node
+    Entering Finance Rules Node
+    Under funded customer
+    Set Request invalid comment to: Poor customer.
+    Customer request= org.jbpm.evaluation.customer.Request@31
+    Leaving Finance Rules Node.
+    Gateway: Decide Financial Status
+    Determined request is NOT valid, heading to Poor Customer Node
+    Request validity reason is: Poor customer
+    Leaving Finance Rules Node.
+    Gateway: Decide Financial Status
+    Detected  request is invalid, heading to Poor Customer Node
+    Request not valid reason is: Poor customer
+    Entering Poor Customer Node
+    Customer has amount: 2 in the bank.
+    Leaving Poor Customer Node
+    Process ended in End Poor Customer Node.
+    
+    ==========================================
+    = Starting Process Rich Adult Test Case. =
+    ==========================================
+    Entering Initialize Node
+    Leaving Initialize Node
+    Gateway: Qualify Age
+    Gateway: Qualify Age
+    Entering Adult Customer Node
+    Detected and reporting valid request
+    Set validRequest to: true
+    Leaving Adult Customer Node
+    Entering Finance Rules Node
+    Leaving Finance Rules Node.
+    Gateway: Decide Financial Status
+    Determined request is valid, heading to Rich Customer Node
+    Entering Rich Customer Node
+    Detected and reporting valid request
+    Customer has amount: 2000 in the bank.
+    Leaving Rich Customer Node
+    Process ended in End Rich Customer Node.
+    
+    =============================================
+    = Starting Process Empty Request Test Case. =
+    =============================================
+    Entering Initialize Node
+    There as no evaluation objects defined, adding default ones for demo purposes.
+    Leaving Initialize Node
+    Gateway: Qualify Age
+    Gateway: Qualify Age
+    Entering Underaged Node
+    Detected and reporting invalid request.
+    Set validRequest to: false
+    Leaving Underaged Node
+    Process ended in End Minor Node.
+    Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.175 sec
+    
+    Results :
+    
+    Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+    
